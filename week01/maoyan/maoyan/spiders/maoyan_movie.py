@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
+"""
+作業要求:
+    使用 Scrapy 框架和 XPath 抓取猫眼电影的前 10 个电影名称、电影类型和上映时间，并以 UTF-8 字符集保存到 csv 格式的文件中。
+    猫眼电影网址： https://maoyan.com/films?showType=3
+    要求：必须使用 Scrapy 框架及其自带的 item pipeline、选择器功能，不允许使用 bs4 进行页面内容的筛选。
+
+"""
 import scrapy
+from maoyan.items import MaoyanItem
 from scrapy.selector import Selector
+from pathlib import Path
+import os
 
 class MaoyanMovieSpider(scrapy.Spider):
     name = 'maoyan_movie'
     allowed_domains = ['maoyan.com']
     start_urls = ['https://maoyan.com/films?showType=3']
-    # start_urls = ['http://httpbin.org/get']
 
     def parse(self, response):
         return parse_item(response.text)
@@ -27,11 +36,10 @@ def parse_item(html):
         # 電影時刻
         movie_time = ''.join(x for x in movie.xpath('.//div[@class="movie-hover-info"]/div[4]/text()').extract())
         movie_time = stripText(movie_time)
-
-        yield  dict(
+        yield MaoyanItem(
             title=title,
-            movie_type=movie_type,
-            movie_time=movie_time
+            type=movie_type,
+            time=movie_time
         )
 
 # strip text
@@ -41,7 +49,9 @@ def stripText(text):
 
 if __name__ == "__main__":
     html = ''
-    with open('D:\github\_my\Python-002\week01\sample.html', 'r', encoding='utf-8') as f:
+    htmlFile = os.path.join(Path(__file__).parent.parent.parent.parent,"sample.html")
+    print(htmlFile)
+    with open(htmlFile, 'r', encoding='utf-8') as f:
         html = f.read()
     y = parse_item(html)
     print(list(y))
