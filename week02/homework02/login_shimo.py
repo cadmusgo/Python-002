@@ -5,8 +5,8 @@
 from selenium import webdriver
 import time
 
-user_name = 'cadmus.go@gmail.com'
-password = 'XPV3FKlkFUyPMDRnBFQR'
+user_name = 'fake_email@email.com'
+password = '1231312312312321'
 
 browser = webdriver.Chrome()
 browser.get('https://shimo.im/login?from=home')
@@ -21,8 +21,3 @@ elPassword.send_keys(password)
 
 btnSubmit = browser.find_elements_by_tag_name("button")[0]
 btnSubmit.click()
-
-
-
-
-
