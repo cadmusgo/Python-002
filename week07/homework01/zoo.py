@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from AnimalProperty import *
+from animalproperty import *
 
 
 # 動物園
@@ -74,21 +74,19 @@ if __name__ == "__main__":
     # 实例化动物园
     z = Zoo('时间动物园')
 
-    # 实例化 猫1
+    # 实例化 猫1,貓2
     cat1 = Cat('大花猫 1', AnimalFeeding.Meat, AnimalSize.Medium, AnimalTemperament.Tame)
+    cat2 = Cat('小花猫 2', AnimalFeeding.Meat, AnimalSize.Small, AnimalTemperament.Tame)
+    # 实例化 狗1
+    dog1 = Dog('小白狗', AnimalFeeding.Meat, AnimalSize.Small, AnimalTemperament.Tame)
+
     # 增加一只猫到动物园
     z.add_animal(cat1)
     # 重複加入提示
     z.add_animal(cat1)
-
-    # 实例化 猫1
-    cat2 = Cat('小花猫 2', AnimalFeeding.Meat, AnimalSize.Small, AnimalTemperament.Tame)
-    # 增加一只猫到动物园
     z.add_animal(cat2)
 
-    # 实例化 狗1
-    dog1 = Dog('小白狗', AnimalFeeding.Meat, AnimalSize.Small, AnimalTemperament.Tame)
-    # 增加一只猫到动物园
+    # 增加一只狗到动物园
     z.add_animal(dog1)
 
     # 动物园是否有猫这种动物
